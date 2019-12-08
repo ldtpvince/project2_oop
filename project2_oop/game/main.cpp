@@ -12,6 +12,7 @@ int main()
 	Menu* m = new Menu(listMenu);//khởi tạo menu
 	TextColor(11);//đổi màu trò chơi
 	m->NameGame();//ghi tên game ra màn hình
+	bool isNameGame = true;//flag de hien tien game
 	
 	int dir = 0, dir0 = 0;// Khởi tạo biến dir = 0 dùng để chọn các mục trong menu
 	bool Choose = false;//khởi tại biến lựa chọn bằng false
@@ -20,8 +21,11 @@ int main()
 	//mainloop
 	while (true)
 	{
-		system("cls");
-		m->NameGame();//ghi tên game ra màn hình
+		if (isNameGame == false) {//neu ten game khong ton tai
+			system("cls");
+			m->NameGame();//ghi tên game ra màn hình
+			isNameGame = true;
+		}
 
 		for (int i = 0; i < listMenu.size(); i++)//duyệt từ đầu đến hết menu
 		{
@@ -35,8 +39,10 @@ int main()
 		if (Choose == true)// nếu lựa chọn bằng true
 		{
 			Choose = false;//gán choose bằng false
+			isNameGame = false;
 			if (dir == 0) // play game;
 			{
+
 				Player* game = new Player();//tạo ra player để bắt đầu game
 				game->DrawBox();//Vẽ khung game
 
@@ -48,16 +54,13 @@ int main()
 					game->Logic();//xử lý va chạm
 				}
 
-				
-				game->clearItems();//xoa items
-				game->Win();//xu ly thang game
-
 				delete game;//xóa game
 
 				//exit(0);
 			}
 			else if (dir == 1) // play game;
 			{
+
 				Player* game = new Machine();//tạo ra player để bắt đầu game
 				game->DrawBox();//Vẽ khung game
 
@@ -69,24 +72,16 @@ int main()
 					game->Logic();//xử lý va chạm
 				}
 
-				game->clearItems();//xoa items
-				game->Win();
-
 				delete game;//xóa game
 
-				//exit(0);
 			}
 			else if (dir == 2) // Guide
 			{
 				m->guide();//hiện hàm hướng dẫn 
 
-				system("cls");
-				m->NameGame();
 			}
 			else if (dir == 3) {// diem so cao
 				Player::showHighScores();
-				system("cls");
-				m->NameGame();//ghi tên game ra màn hình
 			}
 			else if (dir == 4)//lựa chọn bằng 2 tức exit game
 			{

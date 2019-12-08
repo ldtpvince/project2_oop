@@ -32,29 +32,31 @@ void Machine::Input() {
 		if (key == 'q' || key == 'Q')//nếu nhấn q or Q thì quit game
 		{
 			quit = true;
-			Win1(score1, score2);
-			cout << "\n\n\n\n\n\n\n\n\n\n\n\n\n";
-			exit(0);
 		}
 
+		
+
+		if (ball->getDirection() == STOP)//nếu hướng bóng đang là STOP thì random hướng cho bóng
+			ball->randomDirection();
+	}
+
+	speed += 0.3;
+	if (speed >= 1) {
+		speed = 0;
 		//neu toa do y cua may lon hon toa do y cua bong -> may di chuyen len
-		if (player2y > bally) {
+		if (player2y + player2->getMaxBarPlayer()/2 > bally) {
 			if (player2y - player2->getSpeed() > 1)
 				player2->moveUp();
 			else player2->moveUp(true);
 		}
 
 		//neu toa do y cua may nho hon toa do y cua bong -> may di chuyen xuong 1 don vi
-		if (player2y < bally) {
+		if (player2y + player2->getMaxBarPlayer() / 2 < bally) {
 			if (player2y + player2->getMaxBarPlayer() + player1->getSpeed() < HeightGame - 1)
 				player2->moveDown();
 			else player2->moveDown(true);
 		}
-
-		if (ball->getDirection() == STOP)//nếu hướng bóng đang là STOP thì random hướng cho bóng
-			ball->randomDirection();
 	}
-
 
 	
 }

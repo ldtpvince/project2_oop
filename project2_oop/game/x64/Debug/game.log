@@ -1,18 +1,1 @@
-﻿  Ball.cpp
-  DoHoa.cpp
-C:\Users\Sy Pham\Documents\GitHub\Game\project2_oop\project2_oop\game\DoHoa.cpp(5,15): warning C4838: conversion from 'int' to 'SHORT' requires a narrowing conversion
-  Items.cpp
-  Machine.cpp
-  main.cpp
-C:\Users\Sy Pham\Documents\GitHub\Game\project2_oop\project2_oop\game\DoHoa.cpp(5,17): warning C4838: conversion from 'int' to 'SHORT' requires a narrowing conversion
-  Menu.cpp
-C:\Users\Sy Pham\Documents\GitHub\Game\project2_oop\project2_oop\game\main.cpp(18,17): warning C4309: 'initializing': truncation of constant value
-  paddle.cpp
-  Player.cpp
-C:\Users\Sy Pham\Documents\GitHub\Game\project2_oop\project2_oop\game\Menu.cpp(86,29): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
-C:\Users\Sy Pham\Documents\GitHub\Game\project2_oop\project2_oop\game\Player.cpp(35,31): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
-C:\Users\Sy Pham\Documents\GitHub\Game\project2_oop\project2_oop\game\Player.cpp(65,7): warning C4101: 'c': unreferenced local variable
-  Generating Code...
-C:\Users\Sy Pham\Documents\GitHub\Game\project2_oop\project2_oop\game\Player.cpp(366,12): warning C4305: '+=': truncation from 'double' to 'float'
-C:\Users\Sy Pham\Documents\GitHub\Game\project2_oop\project2_oop\game\Items.cpp(102): warning C4715: 'createItems': not all control paths return a value
-  game.vcxproj -> C:\Users\Sy Pham\Documents\GitHub\Game\project2_oop\project2_oop\x64\Debug\game.exe
+﻿  game.vcxproj -> C:\Users\Sy Pham\Desktop\18120526_18120538\Source\FINAL\x64\Debug\game.exe

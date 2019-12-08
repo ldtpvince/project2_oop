@@ -11,7 +11,7 @@ const string fileHighScores = "highScores.txt";
 class Player // Tạo class người chơi
 {
 protected:
-	int score1, score2; //Điểm số
+	int score1, score2; //Điểm 
 	bool quit; //biến dùng để thoát game
 	Ball* ball; //Gọi lại class bóng để dùng
 	cPaddle1* player1; //Tạo thanh trượt gán tên player1
@@ -24,6 +24,7 @@ protected:
 
 	int maxTime = 60;//gioi han thoi gian choi
 	float time = 0;//thoi gian choi
+	bool isTimeOut = false;//flag thoi gian
 
 public:
 	Player();//Hàm tạo player

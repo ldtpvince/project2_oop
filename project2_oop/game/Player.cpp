@@ -148,6 +148,11 @@ void Player::Win()
 	score1 = player1->getScore();
 	score2 = player2->getScore();
 	//Lệnh kiểm tra người chiến thắng và dừng game
+	if (isTimeOut == true) {
+		TextColor(4);//hàm đổi màu dòng chữ in ra bên dưới
+		gotoxy(13, HeightGame / 2 - 2);//gọi hàm tọa độ để in ra đúng tọa độ mình cần in
+		cout << "        TIME OUT        ";
+	}
 	if (score1 > score2)//nếu người chơi 1 được 3 điểm thì in ra dòng chứ player 1 win và dừng game
 	{
 		TextColor(10);//hàm đổi màu dòng chữ in ra bên dưới
@@ -363,7 +368,7 @@ void Player::Input()//Hàm quản lý nhập liệu từ bàn phím
 {
 	ball->Move();//bóng trỏ đến hàm Move để lấy hướng di chuyển hiện tại
 
-	time+=0.05;//tang thoi gian
+	
 
 	int ballx = ball->getX();//lấy tọa độ bóng x
 	int bally = ball->getY();//lấy tạo độ bóng y
@@ -407,10 +412,6 @@ void Player::Input()//Hàm quản lý nhập liệu từ bàn phím
 		if (key == 'q' || key == 'Q')//nếu nhấn q or Q thì quit game
 		{
 			quit = true;
-			/*
-			Win1(score1, score2);
-			cout << "\n\n\n\n\n\n\n\n\n\n\n\n\n";
-			exit(0);*/
 		}
 
 		if (ball->getDirection() == STOP)//nếu hướng bóng đang là STOP thì random hướng cho bóng
@@ -420,7 +421,8 @@ void Player::Input()//Hàm quản lý nhập liệu từ bàn phím
 
 void Player::Logic()//Hàm thực hiện chức năng xử lí va chạm
 {
-	
+	time += 0.05;//tang thoi gian
+
 	//tao items moi
 	int isCreateItem = 1 + rand() % (30 + 1);
 	if (isCreateItem==7) items.push_back(createItems());
@@ -438,9 +440,6 @@ void Player::Logic()//Hàm thực hiện chức năng xử lí va chạm
 	int player2x = player2->getX();//Lấy tọa độ x của player2
 	int player1y = player1->getY();//Lấy tọa độ y của player1
 	int player2y = player2->getY();//Lấy tọa độ y của player2
-
-	//int score1 = 0;//khởi tạo điểm của player1 bằng 0
-	//int score2 = 0;//khởi tạo điểm của player2 bằng 0
 
 	
 	//left paddle
@@ -538,10 +537,13 @@ void Player::Logic()//Hàm thực hiện chức năng xử lí va chạm
 		quit = true;
 	}
 
-	if (time == maxTime)//het thoi gian choi game
+	if (time >= maxTime+1)//het thoi gian choi game
+	{
 		quit = true;
+		isTimeOut = true;
+	}
 
-	//xoa nguoi choi
+	//xu ly thang game
 	if (quit == true) {
 		for (int i = 1; i < HeightGame; i++)
 		{
@@ -551,6 +553,13 @@ void Player::Logic()//Hàm thực hiện chức năng xử lí va chạm
 		{
 			gotoxy(WidthGame - 2, i); cout << " ";//Xóa player2
 		}
+
+		gotoxy(ball->getX0(), ball->getY0());//xoa bong
+		cout << " ";
+		
+		clearItems();//xoa vat pham
+
+		Win();// hien man hinh khi thang game
 	}
 
 	
