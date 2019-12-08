@@ -534,7 +534,7 @@ void Player::Logic()//Hàm thực hiện chức năng xử lí va chạm
 			gotoxy(WidthGame - 2, i); cout << " ";//Xóa player2
 		}
 		*/
-		player1->upScore();
+		player2->upScore();
 		quit = true;
 	}
 
