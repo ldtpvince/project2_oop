@@ -66,6 +66,7 @@ public:
 	}
 
 	void drawPaddle();//ve nguoi choi
+	void saveInfo(ofstream& out);
 };
 
 class cPaddle1 :public cPaddle {

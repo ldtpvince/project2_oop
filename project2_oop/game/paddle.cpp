@@ -60,3 +60,7 @@ void cPaddle::drawPaddle() {//ve nguoi choi
 	oldMaxBar = MaxBarPlayer;//dieu chinh chieu dai cu
 
 }
+
+void cPaddle::saveInfo(ofstream& out) {
+	out.write((char*)this, sizeof(cPaddle));
+}

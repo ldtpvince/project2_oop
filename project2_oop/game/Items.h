@@ -5,11 +5,12 @@
 #include <time.h>
 
 const int numTypeItems = 8;
+const int nameSize = 15;
 
 class Items
 {
 protected:
-	string name;//ten item
+	bool isBarrier = false;
 	char shape;//hinh dang
 
 	int x;
@@ -40,6 +41,10 @@ public:
 		return y;
 	}
 
+	bool checkBarrier() {
+		return isBarrier;
+	}
+
 	virtual void existentItems(Ball* ball);//ham xac dinh vat pham co va cham vs bong
 	void drawItems();//ve vat pahm
 
@@ -50,16 +55,17 @@ public:
 		cout << " ";
 	}
 
-	string getNameItem() {//ten vat pham
-		return name;
-	}
+	//string getNameItem() {//ten vat pham
+	//	return name;
+	//}
+
+	void saveInfo(ofstream& out);
 };
 
 
 class DoubleScore :public Items {
 public:
 	DoubleScore(int x, int y):Items(x,y) {
-		name = "Double Score";
 		shape = 'D';
 	}
 
@@ -71,7 +77,6 @@ public:
 class HalfScore :public Items {
 public:
 	HalfScore(int x, int y) :Items(x, y) {
-		name = "Half Score";
 		shape = 'H';
 	}
 
@@ -83,7 +88,6 @@ public:
 class FasterSpeed :public Items {
 public:
 	FasterSpeed(int x, int y) :Items(x, y) {
-		name = "Faster";
 		shape = 'F';
 	}
 
@@ -95,7 +99,6 @@ public:
 class SlowerSpeed :public Items {
 public:
 	SlowerSpeed(int x, int y) :Items(x, y) {
-		name = "Slower Speed";
 		shape = 'S';
 	}
 
@@ -107,7 +110,6 @@ public:
 class LongLength :public Items {
 public:
 	LongLength(int x, int y) :Items(x, y) {
-		name = "Long Length";
 		shape = 'L';
 	}
 
@@ -119,7 +121,6 @@ public:
 class ShortLength :public Items {
 public:
 	ShortLength(int x, int y) :Items(x, y) {
-		name = "Short Length";
 		shape = 's';
 	}
 
@@ -132,7 +133,7 @@ public:
 class Barier :public Items {
 public:
 	Barier(int x, int y) :Items(x, y) {
-		name = "Barier";
+		isBarrier = true;
 		shape = 'B';
 	}
 
@@ -147,7 +148,6 @@ public:
 class PathItems :public Items {
 public:
 	PathItems(int x, int y) :Items(x, y) {
-		name = "Path Items";
 		shape = 'P';
 	}
 

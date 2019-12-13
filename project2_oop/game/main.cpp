@@ -12,7 +12,7 @@ int main()
 	Menu* m = new Menu(listMenu);//khởi tạo menu
 	TextColor(11);//đổi màu trò chơi
 	m->NameGame();//ghi tên game ra màn hình
-	bool isNameGame = true;//flag de hien tien game
+	bool isNameGame = true;//flag de hien ten game
 	
 	int dir = 0, dir0 = 0;// Khởi tạo biến dir = 0 dùng để chọn các mục trong menu
 	bool Choose = false;//khởi tại biến lựa chọn bằng false
@@ -42,7 +42,6 @@ int main()
 			isNameGame = false;
 			if (dir == 0) // play game;
 			{
-
 				Player* game = new Player();//tạo ra player để bắt đầu game
 				game->DrawBox();//Vẽ khung game
 
@@ -82,7 +81,11 @@ int main()
 			else if (dir == 3) {// diem so cao
 				Player::showHighScores();
 			}
-			else if (dir == 4)//lựa chọn bằng 2 tức exit game
+			else if (dir == 4) {
+				Player* game = new Player();
+
+			}
+			else if (dir == 5)//lựa chọn bằng 6 tức exit game
 			{
 				delete m;
 				system("cls");
