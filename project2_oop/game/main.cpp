@@ -88,6 +88,12 @@ int main()
 
 				int typeGame = 0;
 				string path = m->loadGameMenu(typeGame);
+
+				if (path == "") {
+					Choose = true;
+					continue;
+				}
+
 				Player* game;
 
 				if (typeGame == 0) {
