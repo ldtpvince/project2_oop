@@ -7,6 +7,8 @@
 const int numTypeItems = 8;
 const int nameSize = 15;
 
+enum {DOUBLESCORE, HALFSCORE, FASTERSPEED, SLOWERSPEED, LONGLENGTH, SHORTLENGTH, BARRIER, PATHITEMS};
+
 class Items
 {
 protected:
@@ -17,7 +19,7 @@ protected:
 	int y;
 
 	bool isExistent = true;//flag vat pham con ton tai
-
+	int type;
 public:
 	
 	Items(int x, int y) {//ham khoi tao
@@ -60,6 +62,9 @@ public:
 	//}
 
 	void saveInfo(ofstream& out);
+	int getType() {
+		return type;
+	}
 };
 
 
@@ -67,6 +72,7 @@ class DoubleScore :public Items {
 public:
 	DoubleScore(int x, int y):Items(x,y) {
 		shape = 'D';
+		type = DOUBLESCORE;
 	}
 
 	void attributeItems(cPaddle* player) {// gap doi diem
@@ -78,6 +84,7 @@ class HalfScore :public Items {
 public:
 	HalfScore(int x, int y) :Items(x, y) {
 		shape = 'H';
+		type = HALFSCORE;
 	}
 
 	void attributeItems(cPaddle* player) {// giam 1 nua diem
@@ -89,6 +96,7 @@ class FasterSpeed :public Items {
 public:
 	FasterSpeed(int x, int y) :Items(x, y) {
 		shape = 'F';
+		type = FASTERSPEED;
 	}
 
 	void attributeItems(cPaddle* player) {// tang toc do nguoi choi
@@ -100,6 +108,7 @@ class SlowerSpeed :public Items {
 public:
 	SlowerSpeed(int x, int y) :Items(x, y) {
 		shape = 'S';
+		type = SLOWERSPEED;
 	}
 
 	void attributeItems(cPaddle* player) {// giam toc do nguoi choi
@@ -111,6 +120,7 @@ class LongLength :public Items {
 public:
 	LongLength(int x, int y) :Items(x, y) {
 		shape = 'L';
+		type = LONGLENGTH;
 	}
 
 	void attributeItems(cPaddle* player) { // tang chieu dai thanh truot
@@ -122,6 +132,7 @@ class ShortLength :public Items {
 public:
 	ShortLength(int x, int y) :Items(x, y) {
 		shape = 's';
+		type = SHORTLENGTH;
 	}
 
 	void attributeItems(cPaddle* player) { // giam chieu dai thanh truot
@@ -135,6 +146,7 @@ public:
 	Barier(int x, int y) :Items(x, y) {
 		isBarrier = true;
 		shape = 'B';
+		type = BARRIER;
 	}
 
 
@@ -142,13 +154,13 @@ public:
 		Items::existentItems(ball);
 		isExistent = true;//vat pham khong bien mat
 	}
-
 };
 
 class PathItems :public Items {
 public:
 	PathItems(int x, int y) :Items(x, y) {
 		shape = 'P';
+		type = PATHITEMS;
 	}
 
 	void existentItems(Ball* ball) {

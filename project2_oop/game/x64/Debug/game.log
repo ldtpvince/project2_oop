@@ -1,11 +1,4 @@
-﻿  Machine.cpp
-  Menu.cpp
-D:\Users\Documents\GitHub\project2_oop\project2_oop\game\Machine.cpp(43,14): warning C4305: '+=': truncation from 'double' to 'float'
-  Player.cpp
+﻿  Menu.cpp
 D:\Users\Documents\GitHub\project2_oop\project2_oop\game\Menu.cpp(87,29): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
-D:\Users\Documents\GitHub\project2_oop\project2_oop\game\Player.cpp(62,31): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
-  main.cpp
-D:\Users\Documents\GitHub\project2_oop\project2_oop\game\Player.cpp(92,7): warning C4101: 'c': unreferenced local variable
-  Generating Code...
-D:\Users\Documents\GitHub\project2_oop\project2_oop\game\main.cpp(19,17): warning C4309: 'initializing': truncation of constant value
+D:\Users\Documents\GitHub\project2_oop\project2_oop\game\Menu.cpp(161,16): warning C4309: 'initializing': truncation of constant value
   game.vcxproj -> D:\Users\Documents\GitHub\project2_oop\project2_oop\x64\Debug\game.exe

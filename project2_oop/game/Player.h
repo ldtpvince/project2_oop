@@ -52,7 +52,8 @@ public:
 
 	void drawPathBall();//ve duong path cua bong
 
-	void saveGame();
-	void loadGame();
+	virtual void saveGame();
+	virtual void loadGame(string path);
 };
 
+void deleteTextOnScreen(int x, int y, string s);

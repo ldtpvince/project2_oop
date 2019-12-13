@@ -135,6 +135,7 @@ void mButton()//quay về trang đầu sau khi nhấn vào Guide
 		}
 	} while (true);
 }
+
 void Menu::guide()//Hàm hướng dẫn chơi
 {
 	system("cls");
@@ -148,6 +149,75 @@ void Menu::guide()//Hàm hướng dẫn chơi
 	cout << "          Press Q to exit game           " << endl;
 	
 	system("pause");
+}
+
+string Menu::loadGameMenu(int& type) {
+	ifstream listFileSave("listFileSave.saves", ios::in);
+	vector<string> filenames;
+	vector<int> typeGame;
+	int anchorX = 30;
+	int anchorY = 16;
+	int step = 2;
+	char symbol = 175;
+	int pos = 0;
+	char button = 0;
+	string chosenPath;
+	bool exitFlag = false;
+
+	while (!listFileSave.eof()) {
+		string temp;
+		getline(listFileSave, temp);
+		if (temp == "") {
+			break;
+		}
+		filenames.push_back(temp);
+		getline(listFileSave, temp);
+		typeGame.push_back(stoi(temp));
+	}
+	listFileSave.close();
+
+	gotoxy(anchorX, anchorY);
+	cout << "Choose save files: ";
+
+	while (!exitFlag) {
+		for (int i = 0; i < filenames.size(); i++) {
+			if (i == pos) {
+				gotoxy(anchorX - 4, anchorY + (i + 1) * step);
+				cout << symbol << " " << filenames[i] << "  ";
+				continue;
+			}
+			gotoxy(anchorX, anchorY + (i + 1) * step);
+			cout << filenames[i];
+		}
+
+		if (_kbhit()) {
+			button = _getch();
+
+			switch (button) {
+			case 80:
+				if (pos < filenames.size() - 1) {
+					gotoxy(anchorX - 4, anchorY + (pos + 1) * step);
+					cout << "                              ";
+					pos++;
+				}
+				break;
+			case 72:
+				if (pos > 0) {
+					gotoxy(anchorX - 4, anchorY + (pos + 1) * step);
+					cout << "                              ";
+					pos--;
+				}
+				break;
+			case 13:
+				chosenPath = filenames[pos];
+				type = typeGame[pos];
+				exitFlag = true;
+				break;
+			}
+		}
+	}
+
+	return chosenPath;
 }
 
 int Menu::getX() { return x; }

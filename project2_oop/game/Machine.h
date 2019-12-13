@@ -13,5 +13,8 @@ public:
 	Machine() {//ham khoi tao
 		isPlayer = false;
 	}
+
+	void saveGame();
+	void loadGame(string path);
 };
 

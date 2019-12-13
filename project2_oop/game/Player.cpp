@@ -371,7 +371,6 @@ void Player::Logic()//Hàm thực hiện chức năng xử lí va chạm
 		quit = true;//ket thuc game
 	}
 
-
 	if (quit == true) {
 		for (int i = 1; i < HeightGame; i++)
 		{
@@ -450,7 +449,7 @@ void deleteTextOnScreen(int x, int y, string s) {
 
 void Player::saveGame() {
 	string filename;
-	ofstream listFileSave("listFileSave.txt", ios::out);
+	ofstream listFileSave("listFileSave.saves", ios::app);
 	for (int i = 1; i < HeightGame; i++)
 	{
 		gotoxy(2, i); cout << " ";//Xóa player1
@@ -473,9 +472,12 @@ void Player::saveGame() {
 	gotoxy(10, HeightGame / 2);
 	cout << "Save game (name): ";
 	cin >> filename;
-	listFileSave << filename + ".save";
-
+	listFileSave << filename + ".save" << endl;
+	listFileSave << 0 << endl;
+	
 	ofstream saveFile(filename + ".save", ios::out | ios::binary);
+	saveFile.write((char*)&score1, sizeof(int));
+	saveFile.write((char*)&score2, sizeof(int));
 	ball->saveInfo(saveFile);
 	player1->saveInfo(saveFile);
 	player2->saveInfo(saveFile);
@@ -508,5 +510,76 @@ void Player::saveGame() {
 	deleteTextOnScreen(10, HeightGame / 2 + 2, "Continue? (Y/N): ");
 	saveFile.close();
 	listFileSave.close();
+
+	drawItems = false;
 }
 
+void Player::loadGame(string path) {
+	ifstream saveFile(path, ios::in | ios::binary);
+
+	saveFile.read((char*)&score1, sizeof(int));
+	saveFile.read((char*)&score2, sizeof(int));
+
+	saveFile.read((char*)ball, sizeof(Ball));
+	saveFile.read((char*)player1, sizeof(cPaddle));
+	saveFile.read((char*)player2, sizeof(cPaddle));
+
+	int cnt = 0;
+	while (!saveFile.eof()) {
+		Items* temp = new Items(0, 0);
+		saveFile.read((char*)temp, sizeof(Items));
+		Items* temp2 = nullptr;
+
+		switch (temp->getType()) {
+		case DOUBLESCORE: {
+			temp2 = new DoubleScore(temp->getX(), temp->getY());
+			break;
+		}
+		case HALFSCORE: {
+			temp2 = new HalfScore(temp->getX(), temp->getY());
+			break;
+		}
+		case FASTERSPEED: {
+			temp2 = new FasterSpeed(temp->getX(), temp->getY());
+			break;
+		}
+		case SLOWERSPEED: {
+			temp2 = new SlowerSpeed(temp->getX(), temp->getY());
+			break;
+		}
+		case LONGLENGTH: {
+			temp2 = new LongLength(temp->getX(), temp->getY());
+			break;
+		}
+		case SHORTLENGTH: {
+			temp2 = new ShortLength(temp->getX(), temp->getY());
+			break;
+		}
+		case BARRIER: {
+			temp2 = new Barier(temp->getX(), temp->getY());
+			break;
+		}
+		case PATHITEMS: {
+			temp2 = new PathItems(temp->getX(), temp->getY());
+			break;
+		}
+		}
+		
+		if (cnt >= items.size()) {
+			items.push_back(temp2);
+		}
+		else {
+			delete items[cnt];
+			items[cnt] = temp2;
+			cnt++;
+		}
+		delete temp;
+	}
+
+	cnt--;
+	while (cnt < items.size()) {
+		items.erase(items.begin() + cnt);
+	}
+
+	saveFile.close();
+}
