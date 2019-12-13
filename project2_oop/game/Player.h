@@ -22,13 +22,11 @@ protected:
 	bool isPlayer = true;//kiem tra che do choi
 
 	vector<Items*> items;//mang vat pham
-	int maxNumItems = 20;//so vat pham toi da
+	int maxNumItems = 8;//so vat pham toi da
 	int numItems = 0;
 	bool drawItems = false;//flag de ve cac vat pham
 
 	int winner = 0;//xac dinh nguoi thang cuoc
-	
-
 public:
 	Player();//Hàm tạo player
 	~Player();//Hàm hủy player
@@ -53,5 +51,8 @@ public:
 	void initGame();//khao tao game
 
 	void drawPathBall();//ve duong path cua bong
+
+	void saveGame();
+	void loadGame();
 };
 

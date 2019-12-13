@@ -1,18 +1,11 @@
-﻿  Ball.cpp
-  DoHoa.cpp
-C:\Users\Sy Pham\Documents\GitHub\Game\project2_oop\project2_oop\game\DoHoa.cpp(5,15): warning C4838: conversion from 'int' to 'SHORT' requires a narrowing conversion
-C:\Users\Sy Pham\Documents\GitHub\Game\project2_oop\project2_oop\game\DoHoa.cpp(5,17): warning C4838: conversion from 'int' to 'SHORT' requires a narrowing conversion
-  Items.cpp
-  Machine.cpp
-C:\Users\Sy Pham\Documents\GitHub\Game\project2_oop\project2_oop\game\Machine.cpp(43,14): warning C4305: '+=': truncation from 'double' to 'float'
-  main.cpp
-C:\Users\Sy Pham\Documents\GitHub\Game\project2_oop\project2_oop\game\main.cpp(19,17): warning C4309: 'initializing': truncation of constant value
+﻿  Machine.cpp
   Menu.cpp
-C:\Users\Sy Pham\Documents\GitHub\Game\project2_oop\project2_oop\game\Menu.cpp(81,29): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
-  paddle.cpp
+D:\Users\Documents\GitHub\project2_oop\project2_oop\game\Machine.cpp(43,14): warning C4305: '+=': truncation from 'double' to 'float'
   Player.cpp
-C:\Users\Sy Pham\Documents\GitHub\Game\project2_oop\project2_oop\game\Player.cpp(62,31): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
-C:\Users\Sy Pham\Documents\GitHub\Game\project2_oop\project2_oop\game\Player.cpp(92,7): warning C4101: 'c': unreferenced local variable
+D:\Users\Documents\GitHub\project2_oop\project2_oop\game\Menu.cpp(87,29): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+D:\Users\Documents\GitHub\project2_oop\project2_oop\game\Player.cpp(62,31): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+  main.cpp
+D:\Users\Documents\GitHub\project2_oop\project2_oop\game\Player.cpp(92,7): warning C4101: 'c': unreferenced local variable
   Generating Code...
-C:\Users\Sy Pham\Documents\GitHub\Game\project2_oop\project2_oop\game\Items.cpp(100): warning C4715: 'createItems': not all control paths return a value
-  game.vcxproj -> C:\Users\Sy Pham\Documents\GitHub\Game\project2_oop\project2_oop\x64\Debug\game.exe
+D:\Users\Documents\GitHub\project2_oop\project2_oop\game\main.cpp(19,17): warning C4309: 'initializing': truncation of constant value
+  game.vcxproj -> D:\Users\Documents\GitHub\project2_oop\project2_oop\x64\Debug\game.exe

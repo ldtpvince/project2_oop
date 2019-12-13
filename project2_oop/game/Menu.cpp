@@ -31,6 +31,7 @@ Menu::Menu(vector<Menu*>& listSelect)//Danh sách các lựa chọn trong Menu
 	Menu* items2 = new Menu();
 	Menu* items3 = new Menu();
 	Menu* items4 = new Menu();
+	Menu* items5 = new Menu();
 	
 	items->x = 55;//di chuyển đến tọa độ x = 55
 	items->y = 14;//di chuyển đến tọa độ y = 14
@@ -55,15 +56,20 @@ Menu::Menu(vector<Menu*>& listSelect)//Danh sách các lựa chọn trong Menu
 	listSelect.push_back(items3);//Thêm dữ liệu vào danh sách
 
 	items4->x = 55;//di chuyển đến tọa độ x = 55
-	items4->y = 22;//di chuyển đến tọa độ y = 18
-	items4->data = "Exit";//in ra dòng Exit 
+	items4->y = 22;//di chuyển đến tọa độ y = 20
+	items4->data = "Load game";//in ra dòng Save game 
 	listSelect.push_back(items4);//Thêm dữ liệu vào danh sách
 
+	items5->x = 55;//di chuyển đến tọa độ x = 55
+	items5->y = 24;//di chuyển đến tọa độ y = 24
+	items5->data = "Exit";//in ra dòng Exit 
+	listSelect.push_back(items5);//Thêm dữ liệu vào danh sách
 }
 
 Menu::~Menu()
 {
 }
+
 void Menu::move(int& dir, bool& Choose, vector<Menu*> listMenu)//Hàm di chuyển để chọn các mục trong menu game
 {
 	while (true) // vòng lặp luôn đúng
@@ -112,6 +118,7 @@ void Menu::move(int& dir, bool& Choose, vector<Menu*> listMenu)//Hàm di chuyể
 		}
 	}
 }
+
 void mButton()//quay về trang đầu sau khi nhấn vào Guide
 {
 	AnConTro();//Ẩn con trỏ đi
