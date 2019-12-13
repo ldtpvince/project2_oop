@@ -31,6 +31,7 @@ Menu::Menu(vector<Menu*>& listSelect)//Danh sách các lựa chọn trong Menu
 	Menu* items2 = new Menu();
 	Menu* items3 = new Menu();
 	Menu* items4 = new Menu();
+	Menu* items5 = new Menu();
 	
 	items->x = 55;//di chuyển đến tọa độ x = 55
 	items->y = 14;//di chuyển đến tọa độ y = 14
@@ -55,15 +56,20 @@ Menu::Menu(vector<Menu*>& listSelect)//Danh sách các lựa chọn trong Menu
 	listSelect.push_back(items3);//Thêm dữ liệu vào danh sách
 
 	items4->x = 55;//di chuyển đến tọa độ x = 55
-	items4->y = 22;//di chuyển đến tọa độ y = 18
-	items4->data = "Exit";//in ra dòng Exit 
+	items4->y = 22;//di chuyển đến tọa độ y = 20
+	items4->data = "Load game";//in ra dòng Save game 
 	listSelect.push_back(items4);//Thêm dữ liệu vào danh sách
 
+	items5->x = 55;//di chuyển đến tọa độ x = 55
+	items5->y = 24;//di chuyển đến tọa độ y = 24
+	items5->data = "Exit";//in ra dòng Exit 
+	listSelect.push_back(items5);//Thêm dữ liệu vào danh sách
 }
 
 Menu::~Menu()
 {
 }
+
 void Menu::move(int& dir, bool& Choose, vector<Menu*> listMenu)//Hàm di chuyển để chọn các mục trong menu game
 {
 	while (true) // vòng lặp luôn đúng
@@ -112,6 +118,7 @@ void Menu::move(int& dir, bool& Choose, vector<Menu*> listMenu)//Hàm di chuyể
 		}
 	}
 }
+
 void mButton()//quay về trang đầu sau khi nhấn vào Guide
 {
 	AnConTro();//Ẩn con trỏ đi
@@ -128,6 +135,7 @@ void mButton()//quay về trang đầu sau khi nhấn vào Guide
 		}
 	} while (true);
 }
+
 void Menu::guide()//Hàm hướng dẫn chơi
 {
 	system("cls");
@@ -141,6 +149,75 @@ void Menu::guide()//Hàm hướng dẫn chơi
 	cout << "          Press Q to exit game           " << endl;
 	
 	system("pause");
+}
+
+string Menu::loadGameMenu(int& type) {
+	ifstream listFileSave("listFileSave.saves", ios::in);
+	vector<string> filenames;
+	vector<int> typeGame;
+	int anchorX = 30;
+	int anchorY = 16;
+	int step = 2;
+	char symbol = 175;
+	int pos = 0;
+	char button = 0;
+	string chosenPath;
+	bool exitFlag = false;
+
+	while (!listFileSave.eof()) {
+		string temp;
+		getline(listFileSave, temp);
+		if (temp == "") {
+			break;
+		}
+		filenames.push_back(temp);
+		getline(listFileSave, temp);
+		typeGame.push_back(stoi(temp));
+	}
+	listFileSave.close();
+
+	gotoxy(anchorX, anchorY);
+	cout << "Choose save files: ";
+
+	while (!exitFlag) {
+		for (int i = 0; i < filenames.size(); i++) {
+			if (i == pos) {
+				gotoxy(anchorX - 4, anchorY + (i + 1) * step);
+				cout << symbol << " " << filenames[i] << "  ";
+				continue;
+			}
+			gotoxy(anchorX, anchorY + (i + 1) * step);
+			cout << filenames[i];
+		}
+
+		if (_kbhit()) {
+			button = _getch();
+
+			switch (button) {
+			case 80:
+				if (pos < filenames.size() - 1) {
+					gotoxy(anchorX - 4, anchorY + (pos + 1) * step);
+					cout << "                              ";
+					pos++;
+				}
+				break;
+			case 72:
+				if (pos > 0) {
+					gotoxy(anchorX - 4, anchorY + (pos + 1) * step);
+					cout << "                              ";
+					pos--;
+				}
+				break;
+			case 13:
+				chosenPath = filenames[pos];
+				type = typeGame[pos];
+				exitFlag = true;
+				break;
+			}
+		}
+	}
+
+	return chosenPath;
 }
 
 int Menu::getX() { return x; }

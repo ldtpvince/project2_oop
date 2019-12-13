@@ -38,7 +38,7 @@ void Player::createArrayItems() {
 
 		if (!exsist) {
 			items.push_back(createItems(x, y));
-			if(items[items.size()-1]->getNameItem() != "Barier")//barier khong dc tinh la vat pham
+			if(!items[items.size()-1]->checkBarrier())//barier khong dc tinh la vat pham
 				count++;
 			
 		}
@@ -211,12 +211,10 @@ void Player::Draw()//Hàm vẽ các player và bóng
 
 	player1->drawPaddle();//ve nguoi choi 1
 	player2->drawPaddle();//ve nguoi choi 2
-
 }
 
 void Player::Input()//Hàm quản lý nhập liệu từ bàn phím
 {
-
 	int ballx = ball->getX();//lấy tọa độ bóng x
 	int bally = ball->getY();//lấy tạo độ bóng y
 
@@ -260,6 +258,10 @@ void Player::Input()//Hàm quản lý nhập liệu từ bàn phím
 		{
 			quit = true;
 		}
+		if (key == 'v' || key == 'V') 
+		{
+			saveGame();
+		}
 
 		if (ball->getDirection() == STOP)//nếu hướng bóng đang là STOP thì random hướng cho bóng
 			ball->randomDirection();
@@ -268,8 +270,6 @@ void Player::Input()//Hàm quản lý nhập liệu từ bàn phím
 
 void Player::Logic()//Hàm thực hiện chức năng xử lí va chạm
 {
-
-	
 	//kiem tra su va cham cua cac items
 	for (int i = 0; i < items.size(); i++) {
 		items[i]->existentItems(ball);//kiem tra su va cham giua bong va vat pham
@@ -316,6 +316,7 @@ void Player::Logic()//Hàm thực hiện chức năng xử lí va chạm
 				ball->changeDirection((eDir)((rand() % 3) + 4));//thì hướng của bóng sẽ bị thay đổi
 				player1->upScore();
 				ball->setPlayer(1);
+				//ball->increaseSpeed();
 			}
 		}
 	}
@@ -331,10 +332,9 @@ void Player::Logic()//Hàm thực hiện chức năng xử lí va chạm
 				ball->changeDirection((eDir)((rand() % 3) + 1));//thì hướng của bóng sẽ bị thay đổi
 				player2->upScore();
 				ball->setPlayer(2);
+				//ball->increaseSpeed();
 			}
 		}
-
-
 	}
 
 	//bottom wall
@@ -370,7 +370,6 @@ void Player::Logic()//Hàm thực hiện chức năng xử lí va chạm
 	if (numItems == 0) {//het vat pham
 		quit = true;//ket thuc game
 	}
-
 
 	if (quit == true) {
 		for (int i = 1; i < HeightGame; i++)
@@ -438,4 +437,149 @@ void Player::drawPathBall() {
 	}
 
 	TextColor(11);//cai dat mau 
+}
+
+void deleteTextOnScreen(int x, int y, string s) {
+	gotoxy(x, y);
+
+	for (int i = 0; i <= s.size(); i++) {
+		cout << " ";
+	}
+}
+
+void Player::saveGame() {
+	string filename;
+	ofstream listFileSave("listFileSave.saves", ios::app);
+	for (int i = 1; i < HeightGame; i++)
+	{
+		gotoxy(2, i); cout << " ";//Xóa player1
+	}
+	for (int i = 1; i < HeightGame; i++)
+	{
+		gotoxy(WidthGame - 2, i); cout << " ";//Xóa player2
+	}
+
+	gotoxy(ball->getX0(), ball->getY0());//xoa bong
+	cout << " ";
+	gotoxy(ball->getX(), ball->getY());
+	cout << " ";
+
+	for (int i = 0; i < items.size(); i++) {
+		items[i]->clear();
+	}
+
+	TextColor(10);//hàm đổi màu dòng chữ in ra bên dưới
+	gotoxy(10, HeightGame / 2);
+	cout << "Save game (name): ";
+	cin >> filename;
+	listFileSave << filename + ".save" << endl;
+	listFileSave << 0 << endl;
+	
+	ofstream saveFile(filename + ".save", ios::out | ios::binary);
+	saveFile.write((char*)&score1, sizeof(int));
+	saveFile.write((char*)&score2, sizeof(int));
+	ball->saveInfo(saveFile);
+	player1->saveInfo(saveFile);
+	player2->saveInfo(saveFile);
+
+	for (int i = 0; i < items.size(); i++) {
+		items[i]->saveInfo(saveFile);
+	}
+
+	char option;
+	gotoxy(10, HeightGame / 2 + 2);
+	cout << "Continue? (Y/N): ";
+
+	TextColor(11);
+	
+	while (1) {
+		if (_kbhit()) {
+			option = _getch();
+
+			if (option == 'N' || option == 'n') {
+				quit = true;
+				break;
+			}
+			if (option == 'Y' || option == 'y') {
+				break;
+			}
+		}
+	}
+
+	deleteTextOnScreen(10, HeightGame / 2, "Save game: (name)" + filename);
+	deleteTextOnScreen(10, HeightGame / 2 + 2, "Continue? (Y/N): ");
+	saveFile.close();
+	listFileSave.close();
+
+	drawItems = false;
+}
+
+void Player::loadGame(string path) {
+	ifstream saveFile(path, ios::in | ios::binary);
+
+	saveFile.read((char*)&score1, sizeof(int));
+	saveFile.read((char*)&score2, sizeof(int));
+
+	saveFile.read((char*)ball, sizeof(Ball));
+	saveFile.read((char*)player1, sizeof(cPaddle));
+	saveFile.read((char*)player2, sizeof(cPaddle));
+
+	int cnt = 0;
+	while (!saveFile.eof()) {
+		Items* temp = new Items(0, 0);
+		saveFile.read((char*)temp, sizeof(Items));
+		Items* temp2 = nullptr;
+
+		switch (temp->getType()) {
+		case DOUBLESCORE: {
+			temp2 = new DoubleScore(temp->getX(), temp->getY());
+			break;
+		}
+		case HALFSCORE: {
+			temp2 = new HalfScore(temp->getX(), temp->getY());
+			break;
+		}
+		case FASTERSPEED: {
+			temp2 = new FasterSpeed(temp->getX(), temp->getY());
+			break;
+		}
+		case SLOWERSPEED: {
+			temp2 = new SlowerSpeed(temp->getX(), temp->getY());
+			break;
+		}
+		case LONGLENGTH: {
+			temp2 = new LongLength(temp->getX(), temp->getY());
+			break;
+		}
+		case SHORTLENGTH: {
+			temp2 = new ShortLength(temp->getX(), temp->getY());
+			break;
+		}
+		case BARRIER: {
+			temp2 = new Barier(temp->getX(), temp->getY());
+			break;
+		}
+		case PATHITEMS: {
+			temp2 = new PathItems(temp->getX(), temp->getY());
+			break;
+		}
+		}
+		
+		if (cnt >= items.size()) {
+			items.push_back(temp2);
+		}
+		else {
+			delete items[cnt];
+			items[cnt] = temp2;
+			cnt++;
+		}
+		delete temp;
+	}
+
+	cnt--;
+	while (cnt < items.size()) {
+		items.erase(items.begin() + cnt);
+	}
+
+	saveFile.close();
 }

@@ -2,8 +2,6 @@
 
 
 void Items::existentItems(Ball* ball) {//xac dinh va cham giua vat pham vs bong
-
-
 	if (y == ball->getY() && x == ball->getX() + 1 && ball->getDirection() == RIGHT) {
 		setExistent(0);
 		ball->setInverDir(true);
@@ -39,7 +37,6 @@ void Items::existentItems(Ball* ball) {//xac dinh va cham giua vat pham vs bong
 void Items::drawItems() {
 	gotoxy(x, y);//delete old Items
 	cout << shape;
-
 }
 
 
@@ -97,4 +94,8 @@ Items* createItems(int x, int y) {
 	default:
 		break;
 	}
+}
+
+void Items::saveInfo(ofstream& out) {
+	out.write((char*)this, sizeof(Items));
 }

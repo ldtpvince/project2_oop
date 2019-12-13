@@ -12,7 +12,7 @@ int main()
 	Menu* m = new Menu(listMenu);//khởi tạo menu
 	TextColor(11);//đổi màu trò chơi
 	m->NameGame();//ghi tên game ra màn hình
-	bool isNameGame = true;//flag de hien tien game
+	bool isNameGame = true;//flag de hien ten game
 	
 	int dir = 0, dir0 = 0;// Khởi tạo biến dir = 0 dùng để chọn các mục trong menu
 	bool Choose = false;//khởi tại biến lựa chọn bằng false
@@ -29,10 +29,12 @@ int main()
 
 		for (int i = 0; i < listMenu.size(); i++)//duyệt từ đầu đến hết menu
 		{
-			gotoxy(listMenu[i]->getX(), listMenu[i]->getY()); cout << listMenu[i]->getData();//in ra các lựa chọn trong menu
+			gotoxy(listMenu[i]->getX(), listMenu[i]->getY()); 
+			cout << listMenu[i]->getData();//in ra các lựa chọn trong menu
 		}
 
-		gotoxy(listMenu[dir]->getX() - 3, listMenu[dir]->getY()); cout << dChoose << " " << listMenu[dir]->getData() << "  "; //tạo kí tự đứng trước các mục ( cho đẹp )
+		gotoxy(listMenu[dir]->getX() - 3, listMenu[dir]->getY()); 
+		cout << dChoose << " " << listMenu[dir]->getData() << "  "; //tạo kí tự đứng trước các mục ( cho đẹp )
 
 		m->move(dir, Choose, listMenu); //trỏ đến hàm di chuyển để chọn các mục
 
@@ -42,7 +44,6 @@ int main()
 			isNameGame = false;
 			if (dir == 0) // play game;
 			{
-
 				Player* game = new Player();//tạo ra player để bắt đầu game
 				game->DrawBox();//Vẽ khung game
 
@@ -72,7 +73,6 @@ int main()
 				}
 
 				delete game;//xóa game
-				
 			}
 			else if (dir == 2) // Guide
 			{
@@ -82,7 +82,35 @@ int main()
 			else if (dir == 3) {// diem so cao
 				Player::showHighScores();
 			}
-			else if (dir == 4)//lựa chọn bằng 2 tức exit game
+			else if (dir == 4) {
+				system("cls");
+				m->NameGame();
+
+				int typeGame = 0;
+				string path = m->loadGameMenu(typeGame);
+				Player* game;
+
+				if (typeGame == 0) {
+					game = new Player();
+				}
+				else {
+					game = new Machine();
+				}
+
+				game->loadGame(path);
+				game->DrawBox();
+
+				while (!game->getQuit())// khi game khác Quit thì tiếp tục vẽ rồi ,chơi game , xử lí
+				{
+					game->Draw();//vẽ bóng và thanh trượt
+					Sleep(50);
+					game->Input();//chơi game
+					game->Logic();//xử lý va chạm
+				}
+
+				delete game;//xóa game
+			}
+			else if (dir == 5)//lựa chọn bằng 6 tức exit game
 			{
 				delete m;
 				system("cls");

@@ -62,14 +62,14 @@ void Ball::Move()//Hàm cho bóng di chuyển
 	else if (direction == LEFT)//Nếu hướng = LEFT thì cho X cũ giữ tọa độ của x và sau đó tọa độ x giảm đi 1
 	{
 		x0 = x;
-		x--;
+		x -= floor(speed);
 		invertDir = false;
 		return;
 	}
 	else if (direction == RIGHT)//Nếu hướng = RIGHT thì cho X cũ giữ tọa độ của x và sau đó tọa độ x tăng lên 1
 	{
 		x0 = x;
-		x++;
+		x += floor(speed);
 		invertDir = false;
 		return;
 	}
@@ -77,7 +77,7 @@ void Ball::Move()//Hàm cho bóng di chuyển
 	{
 		x0 = x;
 		y0 = y;
-		x--; y--;
+		x -= floor(speed); y -= floor(speed);
 		invertDir = false;
 		return;
 	}
@@ -85,7 +85,7 @@ void Ball::Move()//Hàm cho bóng di chuyển
 	{
 		x0 = x;
 		y0 = y;
-		x--; y++;
+		x -= floor(speed); y += floor(speed);
 		invertDir = false;
 		return;
 	}
@@ -93,7 +93,7 @@ void Ball::Move()//Hàm cho bóng di chuyển
 	{
 		x0 = x;
 		y0 = y;
-		x++; y--;
+		x += floor(speed); y -= floor(speed);
 		invertDir = false;
 		return;
 	}
@@ -101,12 +101,10 @@ void Ball::Move()//Hàm cho bóng di chuyển
 	{
 		x0 = x;
 		y0 = y;
-		x++; y++;
+		x += floor(speed); y += floor(speed);
 		invertDir = false;
 		return;
 	}
-
-	
 }
 
 void Ball::drawBall() {
@@ -132,3 +130,6 @@ int Ball::getX0() { return x0; }//Hàm trả về tọa độ x cũ
 int Ball::getY0() { return y0; }//Hàm trả về tọa độ y cũ
 eDir Ball::getDirection() { return direction; }//Hàm trả về hướng di chuyển của bóng
 
+void Ball::saveInfo(ofstream& out) {
+	out.write((char*)this, sizeof(Ball));
+}

@@ -13,8 +13,8 @@ private:
 	bool invertDir = false;
 	int player=0;//xac dinh nguoi nao da cham bong
 	bool isPath = false;//flag cho biet nen ve duong path
+	double speed = 1;
 public:
-
 	Ball(int, int);//khởi tạo tọa độ quả bóng
 	void Reset();//reset lại tọa độ quả bóng về ban đầu
 	void changeDirection(eDir);//Đổi hướng di chuyển của bóng
@@ -51,5 +51,5 @@ public:
 	}
 
 	void drawBall();//ve bong
-
+	void saveInfo(ofstream& out);
 };

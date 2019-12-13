@@ -17,6 +17,6 @@ public:
 	int getX();//Hàm trả về tọa độ x
 	int getY();//Hàm trả về tọa độ y
 	string getData();//hàm trả về data 
-
+	string loadGameMenu(int& type);
 };
 
