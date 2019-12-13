@@ -182,9 +182,10 @@ void Player::Draw()//Hàm vẽ các player và bóng
 	int player1y0 = player1->getY0();//Lấy vị trí tọa độ y cũ của player1
 	int player2y0 = player2->getY0();//Lấy vị trí tọa độ y cũ của player2
 
-	gotoxy(WidthGame + 10, 6); cout << "Player 1: " << player1->getScore();//in ra điểm của player1
-	gotoxy(WidthGame + 10, 8); cout << "Player 2: " << player2->getScore();//in ra điểm của player2
-	gotoxy(WidthGame + 10, 10); cout << "Press Q to Exit";//in ra cách để thoát game
+	gotoxy(WidthGame + 10, 4); cout << "Player 1: " << player1->getScore();//in ra điểm của player1
+	gotoxy(WidthGame + 10, 6); cout << "Player 2: " << player2->getScore();//in ra điểm của player2
+	gotoxy(WidthGame + 10, 8); cout << "Press Q to Exit";//in ra cách để thoát game
+	gotoxy(WidthGame + 10, 10); cout << "Press V to save game";
 
 	gotoxy(WidthGame + 10, 14); cout << "Instruction Items:";
 	gotoxy(WidthGame + 10, 16); cout << "L: increasing the length - s: decreasing the length";
