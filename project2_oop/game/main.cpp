@@ -29,10 +29,12 @@ int main()
 
 		for (int i = 0; i < listMenu.size(); i++)//duyệt từ đầu đến hết menu
 		{
-			gotoxy(listMenu[i]->getX(), listMenu[i]->getY()); cout << listMenu[i]->getData();//in ra các lựa chọn trong menu
+			gotoxy(listMenu[i]->getX(), listMenu[i]->getY()); 
+			cout << listMenu[i]->getData();//in ra các lựa chọn trong menu
 		}
 
-		gotoxy(listMenu[dir]->getX() - 3, listMenu[dir]->getY()); cout << dChoose << " " << listMenu[dir]->getData() << "  "; //tạo kí tự đứng trước các mục ( cho đẹp )
+		gotoxy(listMenu[dir]->getX() - 3, listMenu[dir]->getY()); 
+		cout << dChoose << " " << listMenu[dir]->getData() << "  "; //tạo kí tự đứng trước các mục ( cho đẹp )
 
 		m->move(dir, Choose, listMenu); //trỏ đến hàm di chuyển để chọn các mục
 
@@ -71,7 +73,6 @@ int main()
 				}
 
 				delete game;//xóa game
-				
 			}
 			else if (dir == 2) // Guide
 			{
@@ -82,8 +83,32 @@ int main()
 				Player::showHighScores();
 			}
 			else if (dir == 4) {
-				Player* game = new Player();
+				system("cls");
+				m->NameGame();
 
+				int typeGame = 0;
+				string path = m->loadGameMenu(typeGame);
+				Player* game;
+
+				if (typeGame == 0) {
+					game = new Player();
+				}
+				else {
+					game = new Machine();
+				}
+
+				game->loadGame(path);
+				game->DrawBox();
+
+				while (!game->getQuit())// khi game khác Quit thì tiếp tục vẽ rồi ,chơi game , xử lí
+				{
+					game->Draw();//vẽ bóng và thanh trượt
+					Sleep(50);
+					game->Input();//chơi game
+					game->Logic();//xử lý va chạm
+				}
+
+				delete game;//xóa game
 			}
 			else if (dir == 5)//lựa chọn bằng 6 tức exit game
 			{
