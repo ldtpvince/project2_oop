@@ -177,7 +177,7 @@ string Menu::loadGameMenu(int& type) {
 	listFileSave.close();
 
 	gotoxy(anchorX, anchorY);
-	cout << "Choose save files: ";
+	cout << "Choose save files (press B to go back): ";
 
 	while (!exitFlag) {
 		for (int i = 0; i < filenames.size(); i++) {
@@ -192,6 +192,12 @@ string Menu::loadGameMenu(int& type) {
 
 		if (_kbhit()) {
 			button = _getch();
+
+			if (!listFileSave.is_open()) {
+				if (button != 'B' && button != 'b') {
+					button = 0;
+				}
+			}
 
 			switch (button) {
 			case 80:
@@ -213,6 +219,11 @@ string Menu::loadGameMenu(int& type) {
 				type = typeGame[pos];
 				exitFlag = true;
 				break;
+			}
+
+			if (button == 'B' || button == 'b') {
+				chosenPath = "";
+				exitFlag = true;
 			}
 		}
 	}
