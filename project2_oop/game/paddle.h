@@ -10,19 +10,21 @@ protected:
 	int x0, y0;//tọa độ x,y cũ
 	int originalX, originalY;//Tọa độ x, y gốc
 
-	int score = 0;
+	int score = 0;//diem cua nguoi choi
 	int incrementScore = 1;
-	int speed = 2;
-	int minSpeed = 1;
-	int maxSpeed = 3;
+	int speed = 2;//toc do di chuyen
+	int minSpeed = 1;//toc do di chuyen nho nhat
+	int maxSpeed = 3;//toc do di chuyen lon nhat
 
 	int MaxBarPlayer = 5;	//chiều dài thanh trượt moi
 	int oldMaxBar = 5; // chieu dai thanh truot cu
 	int minMaxBar = 3; // chieu dai nho nhat
-	int maxMaxBar = 5; // chieu dai lon nhat
+	int maxMaxBar = 7; // chieu dai lon nhat
+
+	bool misfortune = false;//lag doi huong bong
 
 public:
-	//cPaddle(int, int);//Khởi tạo tọa độ cho 2 thanh trượt
+	
 	void Reset();//Reset về tọa độ đầu tiên của 2 thanh
 	void moveUp();//Hàm di chuyển thanh đi lên
 	void moveDown();//Hàm di chuyển thanh đi xuống
@@ -35,33 +37,35 @@ public:
 	int getX0();//Hàm trả về tọa độ X cũ của thanh
 	int getY0();//Hàm trả về tọa độ y cũ của thanh
 
-	int getMaxBarPlayer() {
+	int getMaxBarPlayer() {//lay chieu dai hien tai cua thanh truot
 		return MaxBarPlayer;
 	}
 
-	int getSpeed() {
+	int getSpeed() {//lay toc do cua nguoi choi
 		return speed;
 	}
 
-	void setSpeed(int x);
+	void setSpeed(int x);//cai dat toc do cho nguoi choi
 
-	void setMaxbar(int x);
+	void setMaxbar(int x);//cai dat chieu dai cho thanh truot
 
-	int getScore() {
+	int getScore() {//lay diem cua nguoi choi
 		return score;
 	}
 
-	void upScore() {
+	void upScore() {//tang diem cho nguoi choi
 		score++;
 	}
 
-	void setScore(int Score) {
+	void setScore(int Score) {//cat dat diem cho nguoi choi
 		score = Score;
 	}
 
-	int getOldMarBar() {
+	int getOldMarBar() {//lay chieu dai cu cua thanh truot
 		return oldMaxBar;
 	}
+
+	void drawPaddle();//ve nguoi choi
 };
 
 class cPaddle1 :public cPaddle {

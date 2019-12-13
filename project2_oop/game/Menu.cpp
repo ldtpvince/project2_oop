@@ -3,6 +3,7 @@
 Menu::Menu()
 {
 }
+
 void Menu::NameGame()//Hàm tên game
 {
 	ifstream FileIn("Name.txt", ios::in);//mở file Name.txt để đọc file
@@ -28,15 +29,9 @@ Menu::Menu(vector<Menu*>& listSelect)//Danh sách các lựa chọn trong Menu
 	Menu* items = new Menu(); //Khởi tạo các items, items1, items2, items3 & items4;
 	Menu* items1 = new Menu();
 	Menu* items2 = new Menu();
-
 	Menu* items3 = new Menu();
 	Menu* items4 = new Menu();
-	/*
-	items->x = 55;//di chuyển đến tọa độ x = 55
-	items->y = 14;//di chuyển đến tọa độ y = 14
-	items->data = "Play Game";//in ra dòng Play Game
-	listSelect.push_back(items);//Thêm dữ liệu vào danh sách
-	*/
+	
 	items->x = 55;//di chuyển đến tọa độ x = 55
 	items->y = 14;//di chuyển đến tọa độ y = 14
 	items->data = "2 Player";//in ra dòng 1 Player
@@ -124,6 +119,7 @@ void mButton()//quay về trang đầu sau khi nhấn vào Guide
 	do {
 		gotoxy(100, 20);
 		cout << " 0: Back ";
+		
 		if (_kbhit())
 		{
 			Check = _getch(); //nếu nhập vào 1 thì thoát hàm Guide
@@ -136,12 +132,15 @@ void Menu::guide()//Hàm hướng dẫn chơi
 {
 	system("cls");
 	NameGame();//In ra tên trò chơi 
-	gotoxy(6, 14); cout << "Player 1: use button W to UP, S to DOWN";
-	gotoxy(6, 16); cout << "Player 2: use button O to UP, K to DOWN";
-	gotoxy(6, 18); cout << "          Press Q to exit game";
-	gotoxy(50, 14); cout << "The winner is the person who achieves the 3 fastest points";
 	
-	mButton();
+	gotoxy(0, 14);//in ra huong dan choi
+	cout << "Player 1: use button W to UP, S to DOWN" << endl;
+	cout << "Player 2: use button O to UP, K to DOWN" << endl;
+	cout << "Players try to pick up ball and items to achieve high score" << endl;
+	cout << "The winner is the person who achieves higher score in the limit time of game" << endl;
+	cout << "          Press Q to exit game           " << endl;
+	
+	system("pause");
 }
 
 int Menu::getX() { return x; }
