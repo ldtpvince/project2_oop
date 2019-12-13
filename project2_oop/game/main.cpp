@@ -56,7 +56,6 @@ int main()
 
 				delete game;//xóa game
 
-				//exit(0);
 			}
 			else if (dir == 1) // play game;
 			{
@@ -73,7 +72,7 @@ int main()
 				}
 
 				delete game;//xóa game
-
+				
 			}
 			else if (dir == 2) // Guide
 			{

@@ -1,7 +1,7 @@
 ﻿#include "Machine.h"
 
 void Machine::Input() {
-	ball->Move();//bóng trỏ đến hàm Move để lấy hướng di chuyển hiện tại
+	//ball->Move();//bóng trỏ đến hàm Move để lấy hướng di chuyển hiện tại
 
 	int ballx = ball->getX();//lấy tọa độ bóng x
 	int bally = ball->getY();//lấy tạo độ bóng y
@@ -40,23 +40,42 @@ void Machine::Input() {
 			ball->randomDirection();
 	}
 
-	speed += 0.3;
-	if (speed >= 1) {
+	speed += 0.4;
+	if (speed >= 1) {//dat gioi han thi cho may di chuyen
 		speed = 0;
 		//neu toa do y cua may lon hon toa do y cua bong -> may di chuyen len
 		if (player2y + player2->getMaxBarPlayer()/2 > bally) {
 			if (player2y - player2->getSpeed() > 1)
 				player2->moveUp();
-			else player2->moveUp(true);
+			else player2->moveUp(true);//di chuyen qua pham vi
 		}
 
 		//neu toa do y cua may nho hon toa do y cua bong -> may di chuyen xuong 1 don vi
 		if (player2y + player2->getMaxBarPlayer() / 2 < bally) {
 			if (player2y + player2->getMaxBarPlayer() + player1->getSpeed() < HeightGame - 1)
 				player2->moveDown();
-			else player2->moveDown(true);
+			else player2->moveDown(true);//di chuyen qua pham vi
 		}
 	}
 
 	
+}
+
+void Machine::Logic() {//ham logic
+	Player::Logic();
+	if (winner == 1 && level < maxLevel) {//nguoi choi 1 thang
+		level++;
+		winner = 0;
+		int preScore = score1;//diem man choi truoc
+		//thong bao man choi moi
+		gotoxy(18, HeightGame / 2);
+		cout << "Next Level";
+		Sleep(1000);
+		gotoxy(18, HeightGame / 2);
+		cout << "          ";
+
+		delete ball, player1, player2;//xoa vung nho
+		initGame();//khoi tao lai game
+		player1->setScore(preScore);//cai dat diem cu cho nguoi choi
+	}
 }
