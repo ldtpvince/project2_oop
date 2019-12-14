@@ -1,29 +1,4 @@
-﻿  Ball.cpp
-D:\Users\Documents\GitHub\project2_oop\project2_oop\game\Ball.cpp(65,20): warning C4244: '-=': conversion from 'double' to 'int', possible loss of data
-D:\Users\Documents\GitHub\project2_oop\project2_oop\game\Ball.cpp(72,20): warning C4244: '+=': conversion from 'double' to 'int', possible loss of data
-D:\Users\Documents\GitHub\project2_oop\project2_oop\game\Ball.cpp(80,20): warning C4244: '-=': conversion from 'double' to 'int', possible loss of data
-D:\Users\Documents\GitHub\project2_oop\project2_oop\game\Ball.cpp(80,39): warning C4244: '-=': conversion from 'double' to 'int', possible loss of data
-D:\Users\Documents\GitHub\project2_oop\project2_oop\game\Ball.cpp(88,20): warning C4244: '-=': conversion from 'double' to 'int', possible loss of data
-D:\Users\Documents\GitHub\project2_oop\project2_oop\game\Ball.cpp(88,39): warning C4244: '+=': conversion from 'double' to 'int', possible loss of data
-D:\Users\Documents\GitHub\project2_oop\project2_oop\game\Ball.cpp(96,20): warning C4244: '+=': conversion from 'double' to 'int', possible loss of data
-D:\Users\Documents\GitHub\project2_oop\project2_oop\game\Ball.cpp(96,39): warning C4244: '-=': conversion from 'double' to 'int', possible loss of data
-D:\Users\Documents\GitHub\project2_oop\project2_oop\game\Ball.cpp(104,20): warning C4244: '+=': conversion from 'double' to 'int', possible loss of data
-  DoHoa.cpp
-D:\Users\Documents\GitHub\project2_oop\project2_oop\game\Ball.cpp(104,39): warning C4244: '+=': conversion from 'double' to 'int', possible loss of data
-D:\Users\Documents\GitHub\project2_oop\project2_oop\game\DoHoa.cpp(5,15): warning C4838: conversion from 'int' to 'SHORT' requires a narrowing conversion
-  Items.cpp
-  Machine.cpp
-D:\Users\Documents\GitHub\project2_oop\project2_oop\game\DoHoa.cpp(5,17): warning C4838: conversion from 'int' to 'SHORT' requires a narrowing conversion
-  Menu.cpp
-D:\Users\Documents\GitHub\project2_oop\project2_oop\game\Machine.cpp(45,14): warning C4305: '+=': truncation from 'double' to 'float'
-D:\Users\Documents\GitHub\project2_oop\project2_oop\game\Menu.cpp(87,29): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
-  Player.cpp
-D:\Users\Documents\GitHub\project2_oop\project2_oop\game\Menu.cpp(161,16): warning C4309: 'initializing': truncation of constant value
-D:\Users\Documents\GitHub\project2_oop\project2_oop\game\Player.cpp(62,31): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
-  main.cpp
-D:\Users\Documents\GitHub\project2_oop\project2_oop\game\Player.cpp(92,7): warning C4101: 'c': unreferenced local variable
-  paddle.cpp
-  Generating Code...
-D:\Users\Documents\GitHub\project2_oop\project2_oop\game\main.cpp(19,17): warning C4309: 'initializing': truncation of constant value
-D:\Users\Documents\GitHub\project2_oop\project2_oop\game\Items.cpp(97): warning C4715: 'createItems': not all control paths return a value
-  game.vcxproj -> D:\Users\Documents\GitHub\project2_oop\project2_oop\x64\Debug\game.exe
+﻿  Player.cpp
+C:\Users\Sy Pham\Documents\GitHub\Game\project2_oop\project2_oop\game\Player.cpp(62,31): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\Sy Pham\Documents\GitHub\Game\project2_oop\project2_oop\game\Player.cpp(92,7): warning C4101: 'c': unreferenced local variable
+  game.vcxproj -> C:\Users\Sy Pham\Documents\GitHub\Game\project2_oop\project2_oop\x64\Debug\game.exe
