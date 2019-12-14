@@ -45,16 +45,22 @@ void cPaddle::drawPaddle() {//ve nguoi choi
 	for (int i = 0; i < oldMaxBar; i++) {
 		gotoxy(x0, y0+i);
 		cout << " ";
+
+		if (y0 + i == HeightGame - 1) break;
 	}
 
 	for (int i = 0; i < oldMaxBar; i++) {
 		gotoxy(x, y + i);
 		cout << " ";
+
+		if (y + i == HeightGame - 1) break;
 	}
 	//ve nguoi choi o vi tri moi
 	for (int i = 0; i < MaxBarPlayer; i++) {
 		gotoxy(x, y + i);
 		cout << char(219);
+
+		if (y + i == HeightGame - 1) break;
 	}
 
 	oldMaxBar = MaxBarPlayer;//dieu chinh chieu dai cu

@@ -17,7 +17,7 @@ void Player::initGame() {//khoi tao cac thong so
 	readHighScores();//Doc nhung diem so cao nhat cua game
 
 	createArrayItems();//tao mang vat pham
-	drawItems = false;
+	//drawItems = false;
 }
 
 void Player::createArrayItems() {
@@ -194,12 +194,18 @@ void Player::Draw()//Hàm vẽ các player và bóng
 	gotoxy(WidthGame + 10, 22); cout << "B: barier to change the direction of ball";
 	gotoxy(WidthGame + 10, 24); cout << "P: showing the direction of ball";
 
+	/*
 	if (drawItems == false) {//ve cac vat pham ban dau
 		for (int i = 0; i < items.size(); i++) {
 			items[i]->drawItems();
 		}
 
 		drawItems = true;//khong ve lai trong vong lap tiep theo
+	}*/
+
+	for (int i = 0; i < items.size(); i++) {
+		if(items[i]->getExistentItems())
+			items[i]->drawItems();
 	}
 	
 	ball->drawBall();//ve bong
@@ -512,7 +518,7 @@ void Player::saveGame() {
 	saveFile.close();
 	listFileSave.close();
 
-	drawItems = false;
+	//drawItems = false;
 }
 
 void Player::loadGame(string path) {

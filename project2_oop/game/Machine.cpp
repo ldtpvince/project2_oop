@@ -150,7 +150,7 @@ void Machine::saveGame() {
 	saveFile.close();
 	listFileSave.close();
 
-	drawItems = false;
+	//drawItems = false;
 }
 
 void Machine::loadGame(string path) {

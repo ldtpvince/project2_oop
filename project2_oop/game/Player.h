@@ -24,7 +24,7 @@ protected:
 	vector<Items*> items;//mang vat pham
 	int maxNumItems = 8;//so vat pham toi da
 	int numItems = 0;
-	bool drawItems = false;//flag de ve cac vat pham
+	//bool drawItems = false;//flag de ve cac vat pham
 
 	int winner = 0;//xac dinh nguoi thang cuoc
 public:
