@@ -194,15 +194,7 @@ void Player::Draw()//Hàm vẽ các player và bóng
 	gotoxy(WidthGame + 10, 22); cout << "B: barier to change the direction of ball";
 	gotoxy(WidthGame + 10, 24); cout << "P: showing the direction of ball";
 
-	/*
-	if (drawItems == false) {//ve cac vat pham ban dau
-		for (int i = 0; i < items.size(); i++) {
-			items[i]->drawItems();
-		}
-
-		drawItems = true;//khong ve lai trong vong lap tiep theo
-	}*/
-
+	//ve vat pham
 	for (int i = 0; i < items.size(); i++) {
 		if(items[i]->getExistentItems())
 			items[i]->drawItems();
@@ -412,7 +404,7 @@ void Player::saveScore(int score) {//luu top diem cao nhat
 }
 //ve duong path cho bong
 void Player::drawPathBall() {
-	Ball* virtualBall = new Ball(ball->getX(), ball->getY());
+	Ball* virtualBall = new Ball(ball->getX(), ball->getY());//tao bong ao
 	virtualBall->setDirection(ball->getDirection());
 
 	TextColor(4);
@@ -444,6 +436,7 @@ void Player::drawPathBall() {
 	}
 
 	TextColor(11);//cai dat mau 
+	delete virtualBall;//xoa bong ao
 }
 
 void deleteTextOnScreen(int x, int y, string s) {
