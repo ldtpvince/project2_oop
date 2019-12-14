@@ -518,7 +518,6 @@ void Player::saveGame() {
 	saveFile.close();
 	listFileSave.close();
 
-	//drawItems = false;
 }
 
 void Player::loadGame(string path) {

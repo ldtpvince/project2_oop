@@ -174,7 +174,6 @@ string Menu::loadGameMenu(int& type) {
 		getline(listFileSave, temp);
 		typeGame.push_back(stoi(temp));
 	}
-	listFileSave.close();
 
 	gotoxy(anchorX, anchorY);
 	cout << "Choose save files (press B to go back): ";
@@ -227,6 +226,7 @@ string Menu::loadGameMenu(int& type) {
 			}
 		}
 	}
+	listFileSave.close();
 
 	return chosenPath;
 }

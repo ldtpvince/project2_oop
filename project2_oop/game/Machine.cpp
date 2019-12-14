@@ -149,8 +149,6 @@ void Machine::saveGame() {
 	deleteTextOnScreen(10, HeightGame / 2 + 2, "Continue? (Y/N): ");
 	saveFile.close();
 	listFileSave.close();
-
-	//drawItems = false;
 }
 
 void Machine::loadGame(string path) {
